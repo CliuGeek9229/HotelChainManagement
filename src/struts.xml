@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<!-- START SNIPPET: xworkSample -->
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.action.extension" value="action,," />
+  
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+
+    <package name="zlgl" namespace="/" extends="struts-default">
+         
+         <!-- 登录 -->
+         <action name="login" class="logAction"> 
+             <result  name="input">/Login.jsp</result>
+             <result  name="success">/Home.jsp</result>
+             <result  name="adminSuccess">/AdminHome.jsp</result>
+             <result  name="error">/Fail.jsp</result>  
+         </action>
+         <action name="room" class="roomAction">
+         	<result name="success">/ModifyRoom.jsp</result>
+         	<result name="success1">/ModifyR.jsp</result>
+         	<result name="success2">/ModifyRoom.jsp</result>
+         </action>
+         <action name="notice" class="noticeAction">
+         	<result name="success">/AdminHome.jsp</result>
+         </action>
+         <action name="employee" class="employeeAction">
+         	<result name="success">/ModifyEmployee.jsp</result>
+         	<result name="success1">/ModifyE.jsp</result>
+         	<result name="success2">/ModifyEmployee.jsp</result>
+         </action>
+         <action name="business" class="businessAction">
+         	<result name="success">/StatisticsBusiness.jsp</result>
+         </action>
+         <action name="evaluate" class="evaluateAction">
+         	<result name="success">/StatisticsEvaluate.jsp</result>
+         </action>
+         
+ 
+         
+    </package>
+ </struts>

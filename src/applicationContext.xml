@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"> 
+           
+           
+    <!-- 定义用户数据源的信息 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  
+        destroy-method="close">  
+        <property name="driverClass">  
+            <value>com.mysql.jdbc.Driver</value>  
+        </property>  
+        <property name="jdbcUrl">  
+            <value>jdbc:mysql://localhost/test</value>  
+        </property>  
+        <property name="user">  
+            <value>root</value>  
+        </property>  
+        <property name="password">  
+            <value>1234</value>  
+        </property>  
+        <property name="maxPoolSize">  
+            <value>80</value>  
+        </property>  
+        <property name="minPoolSize">  
+            <value>1</value>  
+        </property>  
+        <property name="initialPoolSize">  
+            <value>1</value>  
+        </property>  
+        <property name="maxIdleTime">  
+            <value>20</value>  
+        </property>  
+    </bean>
+    
+    <!--定义Hibernate的SessionFactory -->  
+    <!-- SessionFactory使用的数据源为上面的数据源 -->  
+    <!-- 指定了Hibernate的映射文件和配置信息 -->  
+    <bean id="sessionFactory"  
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property>  
+        <property name="mappingResources">  
+            <list>  
+                <value>com/zlgl/ssh/beans/User.hbm.xml</value>
+                <value>com/zlgl/ssh/beans/Room.hbm.xml</value>
+                <value>com/zlgl/ssh/beans/Notice.hbm.xml</value>
+                <value>com/zlgl/ssh/beans/Employee.hbm.xml</value>
+                <value>com/zlgl/ssh/beans/Business.hbm.xml</value>
+                <value>com/zlgl/ssh/beans/Evaluate.hbm.xml</value>  
+            </list>  
+        </property>  
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
+                <prop key="show_sql">true</prop>  
+                <prop key="hibernate.jdbc.batch_size">20</prop>  
+            </props>  
+        </property>  
+    </bean>  
+  
+    <bean id="transactionManager"  
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean>  
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->  
+    <!--用户数据库类 -->
+    <bean id="userDao" class="com.zlgl.ssh.daoImpl.UserDaoImpl">  
+        <property name="sessionFactory">  
+            <ref bean="sessionFactory" />  
+        </property>  
+    </bean>
+    <!-- 房间操作持久化层 -->  
+    <bean id="roomDao" class="com.zlgl.ssh.daoImpl.RoomDaoImpl">
+    	<property name="sessionFactory">  
+            <ref bean="sessionFactory" />  
+        </property>
+    </bean>
+    <!-- 公告操作持久化层操作 -->
+    <bean id="noticeDao" class="com.zlgl.ssh.daoImpl.NoticeDaoImpl">
+    	<property name="sessionFactory">  
+            <ref bean="sessionFactory" />  
+        </property>
+    </bean>
+    <!-- 修改员工持久化层操作 -->
+    <bean id="employeeDao" class="com.zlgl.ssh.daoImpl.EmployeeDaoImpl">
+    	<property name="sessionFactory">  
+            <ref bean="sessionFactory" />  
+        </property>
+    </bean>
+    <!-- 统计营业持久化层操作 -->
+    <bean id="businessDao" class="com.zlgl.ssh.daoImpl.BusinessDaoImpl">
+    	<property name="sessionFactory">  
+            <ref bean="sessionFactory" />  
+        </property>
+    </bean>
+    <!-- 统计评价持久化层 -->
+    <bean id="evaluateDao" class="com.zlgl.ssh.daoImpl.EvaluateDaoImpl">
+    	<property name="sessionFactory">  
+            <ref bean="sessionFactory" />  
+        </property>
+    </bean>
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->    
+    <!--用户业务逻辑类 -->  
+    <bean id="userManager" class="com.zlgl.ssh.serviceImpl.UserManagerImpl">  
+        <property name="dao">  
+            <ref bean="userDao" />  
+        </property>  
+    </bean>
+    <!-- 房间操作业务逻辑层 -->
+    <bean id="roomManager" class="com.zlgl.ssh.serviceImpl.RoomManagerImpl">
+    	<property name="roomDao">
+    		<ref bean="roomDao"/>
+    	</property>
+    </bean>
+    <!-- 发布公告业务逻辑层 -->
+    <bean id="noticeManager" class="com.zlgl.ssh.serviceImpl.NoticeManagerImpl">
+    	<property name="noticeDao">
+    		<ref bean="noticeDao"/>
+    	</property>
+    </bean>
+    <!-- 修改员工业务逻辑层 -->
+    <bean id="employeeManager" class="com.zlgl.ssh.serviceImpl.EmployeeManagerImpl">
+    	<property name="employeeDao">
+    		<ref bean="employeeDao"/>
+    	</property>
+    </bean>
+    <!-- 统计营业业务逻辑层 -->
+    <bean id="businessManager" class="com.zlgl.ssh.serviceImpl.BusinessManagerImpl">
+    	<property name="businessDao">
+    		<ref bean="businessDao"/>
+    	</property>
+    </bean>
+    <!-- 统计评价业务逻辑层 -->
+    <bean id="evaluateManager" class="com.zlgl.ssh.serviceImpl.EvaluateManagerImpl">
+    	<property name="evaluateDao">
+    		<ref bean="evaluateDao"/>
+    	</property>
+    </bean>
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->    
+    <!-- 用户登录的Action -->  
+    <bean id="logAction" class="com.zlgl.ssh.action.LoginAction" scope="prototype">  
+        <property name="userManager">  
+            <ref bean="userManager" />  
+        </property>
+        <property name="roomManager">
+        	<ref bean="roomManager"/>
+        </property>
+        <property name="employeeManager">
+        	<ref bean="employeeManager"/>
+        </property>
+        <property name="businessManager">
+        	<ref bean="businessManager"/>
+        </property>
+        <property name="evaluateManager">
+        	<ref bean="evaluateManager"/>
+        </property>  
+    </bean>
+    <!-- 房间操作的Action -->
+    <bean id="roomAction" class="com.zlgl.ssh.action.RoomAction" scope="prototype">
+    	<property name="roomManager">
+    		<ref bean="roomManager"/>
+    	</property>
+    </bean>
+    <!-- 公告操作的Action -->
+    <bean id="noticeAction" class="com.zlgl.ssh.action.NoticeAction" scope="prototype">
+    	<property name="noticeManager">
+    		<ref bean="noticeManager"/>
+    	</property>
+    </bean>
+    <!-- 员工操作的Action -->
+    <bean id="employeeAction" class="com.zlgl.ssh.action.EmployeeAction" scope="prototype">
+    	<property name="employeeManager">
+    		<ref bean="employeeManager"/>
+    	</property>
+    </bean>
+    <!-- 统计营业的Action -->
+    <bean id="businessAction" class="com.zlgl.ssh.action.BusinessAction" scope="prototype">
+    	<property name="businessManager">
+    		<ref bean="businessManager"/>
+    	</property>
+    </bean>
+    <!-- 统计评价的Action -->
+  	<bean id="evaluateAction" class="com.zlgl.ssh.action.EvaluateAction" scope="prototype">
+  		<property name="evaluateManager">
+  			<ref bean="evaluateManager"/>
+  		</property>
+  	</bean>
+</beans>  
+    
+    
+    
+    

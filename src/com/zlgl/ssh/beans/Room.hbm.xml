@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+ 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<!-- 房间实体类配置文件 -->
+<hibernate-mapping package="com.zlgl.ssh.beans">
+    <class name="Room" table="tb_room_info">
+        <!-- 房间ID映射 -->
+        <id name="roomId" column="roomId">
+            <generator class="native"></generator>
+        </id>
+        <!-- 房间名映射 -->
+        <property name="roomnum" column="roomnum" type="java.lang.String" length="255"/>
+        <!-- 房间类型映射 -->
+        <property name="type" column="type" type="java.lang.Integer"
+          length="1"/>
+         <!-- 房间价格映射 -->
+         <property name="price" column="price" type="java.lang.Integer"
+          length="50"/>
+          <!-- 房间状态映射 -->
+        <property name="status" column="status" type="java.lang.Integer" length="1"/>
+        <!-- 涉及房间描述映射 -->
+        <property name="description" column="description" type="java.lang.String" length="255"/>   
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+ 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<!-- 公告实体类配置文件 -->
+<hibernate-mapping package="com.zlgl.ssh.beans">
+    <class name="Notice" table="tb_notice">
+        <!-- 公告ID映射 -->
+        <id name="noticeid" column="noticeid">
+            <generator class="native"></generator>
+        </id>
+        <!-- 公告题目映射 -->
+        <property name="title" column="title" type="java.lang.String" length="255"/>
+        <!-- 有效天数映射 -->
+        <property name="days" column="days" type="java.lang.Integer"
+          length="1"/>
+         <!-- 公告细节映射 -->
+         <property name="detail" column="detail" type="java.lang.String"
+          length="50"/>
+          <!-- 公告状态映射 -->
+        <property name="status" column="status" type="java.lang.Integer" length="1"/>
+        <!-- 公告创建人映射 -->
+        <property name="createby" column="createby" type="java.lang.String" length="255"/>   
+    	<!-- 公告创建日期 -->
+    	<property name="createdate" column="createdate" type="java.util.Date"/>
+    </class>
+</hibernate-mapping>

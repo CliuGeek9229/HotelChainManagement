@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+ 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<!-- 评价实体类配置文件 -->
+<hibernate-mapping package="com.zlgl.ssh.beans">
+    <class name="Evaluate" table="tb_evaluate">
+        <!-- 评价ID映射 -->
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <!-- 评价人映射 -->
+        <property name="cusname" column="cusname" type="java.lang.String" length="255"/>
+        <!-- 评价内容映射 -->
+        <property name="detail" column="detail" type="java.lang.String"
+          length="255"/>
+         <!-- 评价类型映射 -->
+         <property name="type" column="type" type="java.lang.String"
+          length="255"/>
+    	<!-- 公告创建日期 -->
+    	<property name="sdate" column="sdate" type="java.util.Date"/>
+    </class>
+</hibernate-mapping>
