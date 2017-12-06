@@ -96,7 +96,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records 
 -- ----------------------------
-INSERT INTO `tb_business` VALUES ('997', '我也不知道写啥', '10000', '2017-12-02', 'H3301', '正常营业');
+INSERT INTO `tb_business` VALUES ('997', '入住三天', '10000', '2017-12-02', 'H3301', '正常营业');
 INSERT INTO `tb_business` VALUES ('998', '很烦啊', '10000', '2017-12-03', 'H4565', '折扣营业');
 INSERT INTO `tb_business` VALUES ('999', '真的很烦啊', '10000', '2017-11-15', 'S1154', '正常营业');
 INSERT INTO `tb_business` VALUES ('1000', '入住两晚', '1000', '2017-12-02', 'B3325', '正常营业');
