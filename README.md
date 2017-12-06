@@ -1,2 +1,37 @@
-# HotelChainManagement
-分布式数据库大作业，我负责管理员部分，主要实现的功能是：修改房间，修改员工，添加公告，统计营业，统计评价 5个功能。前前后后写了大概四天，用了SSH框架，本地测试的数据库为MySQL，sql文件我会一起放在远程库上。代码可能有些粗糙，读者老爷见谅。
+## Welcome to GitHub Pages
+
+You can use the [editor on GitHub](https://github.com/CliuGeek9229/HotelChainManagement/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+
+Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
+### Markdown
+
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+```
+
+For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+### Jekyll Themes
+
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/CliuGeek9229/HotelChainManagement/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
+### Support or Contact
+
+Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
